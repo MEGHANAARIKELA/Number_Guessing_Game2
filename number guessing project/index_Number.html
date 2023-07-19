@@ -1,0 +1,164 @@
+<!Doctype HTML>
+<meta charset="UTF-8">
+<html lan="en">
+
+<head>
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            background-color: rgb(73, 65, 65);
+            color:white;
+
+        }
+        .top{
+            display:flex;
+            justify-content: space-between;
+        }
+        h3 {
+            background-color: white;
+            color: black;
+            padding: 10px 20px;
+            float: left;
+            margin: auto 0px;
+        }
+
+        .range {
+            font-size: 30px;
+        }
+
+        .header {
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            letter-spacing: 2px;
+            word-spacing: 7px;
+            margin-bottom: 70px;
+        }
+
+        .ruler {
+            position: relative;
+            height: 10px;
+            background-color: white;
+        }
+
+        .questionmark {
+            background-color: white;
+            color: black;
+            padding: 20px 30px; 
+            font-size: 50px;
+            font-weight: bold;
+            position: absolute;
+            top: -90px;
+            left: 700px;
+            border-radius: 4px;
+        }
+        .output{
+            margin:150px auto;
+            width:400px;
+        }
+        .row{
+            display:flex;
+            gap:100px;
+            align-items: center;
+            width:500px;
+        }
+        .form-input{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .input{
+            width:200px;
+            height:60px;
+            font-size: 30px;
+            border: none;
+            margin-bottom: 15px;
+        }
+        .Button{
+            padding:5px 32px;
+            border:none;
+            height:50px;
+            font-size: 25px;
+        }
+        .side{
+            font-size: 25px;
+        }
+        #status{
+            color:aquamarine;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body id="body">
+    <div class="container" >
+        <div class="top">
+            <div>
+        <Button class="Button" onclick="again()">Again!</Button>
+    </div>
+    <div>
+        <p class="range">( Betwen 1 and 20 )</p>
+        </div>
+    </div>
+        <div class="header">Guess My Number!</div>
+        <div class="ruler">
+            <hr>
+            <p class="questionmark">?</p>
+        </div>
+    </div>
+    <div class="output">
+        <div class="row">
+            <div class="form-input">
+                <form>
+                    <input class="input" type="text" id="number">
+                    <br>
+                    <Button class="Button" onclick="check()">Check!</Button>
+                </form>
+            </div>
+            <div class="side">
+                <p class="status" id="status"></p>
+                <p>Score: <span id="score">20</span></p>
+                <p>Highscore: <span id="highscore">0</span></p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let random;
+    let score;
+    let highscore=0;
+    function again() {
+        body.style.backgroundColor = "rgb(73, 65, 65)";
+        score = 20;
+        document.getElementById('score').textContent = score;
+        random = Math.floor(Math.random() * 20) + 1;
+    }
+
+    function check() {
+        event.preventDefault();
+        let body = document.getElementById('body');
+        let status = document.getElementById('status');
+        let input = parseInt(document.getElementById('number').value);
+
+        if (input > random) {
+            status.textContent = "Entered number is large";
+        } else if (input < random) {
+            status.textContent = "Entered number is small";
+        } else {
+            status.textContent = "Your guess is right, you won the game!";
+            body.style.backgroundColor = "green";
+            status.style.color = "white";
+            if(highscore<score)
+            {
+                highscore=score--;
+                document.getElementById('highscore').textContent = highscore;
+            }
+        }
+
+        if (!isNaN(score)) {
+            score--; 
+            document.getElementById('score').textContent = score;
+        }
+    }
+</script>
+
+</html>
